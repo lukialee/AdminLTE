@@ -1,6 +1,6 @@
 Meteor usage
 ------------
-
+我很喜欢用AdminLTE这个模板，为了在Meteor中更方便地使用，借鉴了YP2的做法，删除了google的css文件。
 This package is inspired by: https://github.com/yp2/AdminLTE/
 Many users in China couldn't access google's server. So I remove this line:
 ```css
@@ -8,13 +8,14 @@ Many users in China couldn't access google's server. So I remove this line:
 ```
 
 
-Installation
+Installation 安装
 ```
 meteor add lukialee:admin-lte
 ```
+可以在客户端代码中为模板或布局代码启用AdminLTE。
 You could use AdminLTE on any template or layout.
 ```js
-Template.templateOrLayout.onRendered(function () {
+Template.template.onRendered(function () {
 
     var self = this;
     if (self.view.isRendered) {
@@ -35,6 +36,7 @@ Template.templateOrLayout.onRendered(function () {
 });
 ```
 
+之后我再加上插件。
 I'll add plugins later.
 
 
