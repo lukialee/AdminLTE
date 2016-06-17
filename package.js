@@ -4,7 +4,7 @@ Package.describe({
   name: 'lukialee:admin-lte',
   version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary: 'AdminLTE for Meteor. ',
+  summary: 'AdminLTE for Meteor. 轻量级, 删除了google css的引用。',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/lukialee/AdminLTE.git',
   // By default, Meteor will default to using README.md for documentation.
@@ -13,7 +13,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3.2.4');
+  api.versionsFrom('1.3.3');
   api.use('ecmascript');
 
   api.use('jquery', where); // Dependencies
