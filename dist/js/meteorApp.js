@@ -7,15 +7,14 @@
  * @Author  Almsaeed Studio
  * @Support <http://www.almsaeedstudio.com>
  * @Email   <support@almsaeedstudio.com>
- * @version 2.2.1
+ * @version 2.3.3
  * @license MIT <http://opensource.org/licenses/MIT>
  */
 
 //Make sure jQuery has been loaded before app.js
-//if (typeof jQuery === "undefined" && typeof Meteor === "undefined") {
-//    throw new Error("AdminLTE requires jQuery");
-
-//}
+/*if (typeof jQuery === "undefined") {
+	throw new Error("AdminLTE requires jQuery");
+}*/
 
 /* AdminLTE
  *
@@ -26,11 +25,9 @@
  *              prevents conflict with other plugins and is a better
  *              way to organize our code.
  */
-
+// $.AdminLTE = {};
 MeteorAdminLTE = {};
-
 MeteorAdminLTE.AdminLTE = {};
-//$.AdminLTE = {};
 
 /* --------------------
  * - AdminLTE Options -
@@ -135,7 +132,6 @@ MeteorAdminLTE.AdminLTE.options = {
 	}
 };
 
-
 MeteorAdminLTE._run = function () {
 	/* ------------------
 	 * - Implementation -
@@ -147,7 +143,6 @@ MeteorAdminLTE._run = function () {
 	var self = this;
 	$(function () {
 		"use strict";
-
 		//Fix for IE page transitions
 		$("body").removeClass("hold-transition");
 
@@ -228,27 +223,25 @@ MeteorAdminLTE._run = function () {
 
 		});
 	});
+
 };
-
+/* ----------------------------------
+ * - Initialize the AdminLTE Object -
+ * ----------------------------------
+ * All AdminLTE functions are implemented below.
+ */
 MeteorAdminLTE._init = function () {
-	/* ----------------------------------
-	 * - Initialize the AdminLTE Object -
-	 * ----------------------------------
-	 * All AdminLTE functions are implemented below.
-	 */
-
 	'use strict';
+	var self = this;
 	/* Layout
 	 * ======
 	 * Fixes the layout height in case min-height fails.
 	 *
 	 * @type Object
-	 * @usage $.AdminLTE.layout.activate()
-	 *        $.AdminLTE.layout.fix()
-	 *        $.AdminLTE.layout.fixSidebar()
+	 * @usage self.AdminLTE.layout.activate()
+	 *        self.AdminLTE.layout.fix()
+	 *        self.AdminLTE.layout.fixSidebar()
 	 */
-	var self = this;
-
 	self.AdminLTE.layout = {
 		activate: function () {
 			var _this = this;
@@ -318,7 +311,7 @@ MeteorAdminLTE._init = function () {
 	 * Adds the push menu functionality to the sidebar.
 	 *
 	 * @type Function
-	 * @usage: $.AdminLTE.pushMenu("[data-toggle='offcanvas']")
+	 * @usage: self.AdminLTE.pushMenu("[data-toggle='offcanvas']")
 	 */
 	self.AdminLTE.pushMenu = {
 		activate: function (toggleBtn) {
@@ -406,7 +399,7 @@ MeteorAdminLTE._init = function () {
 			var checkElement = $this.next();
 
 			//Check if the next element is a menu and is visible
-			if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
+			if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
 				//Close the menu
 				checkElement.slideUp(animationSpeed, function () {
 					checkElement.removeClass('menu-open');
@@ -606,16 +599,16 @@ MeteorAdminLTE._init = function () {
  * All custom plugins are defined below.
  */
 
+/*
+ * BOX REFRESH BUTTON
+ * ------------------
+ * This is a custom plugin to use with the component BOX. It allows you to add
+ * a refresh button to the box. It converts the box's state to a loading state.
+ *
+ * @type plugin
+ * @usage $("#box-widget").boxRefresh( options );
+ */
 MeteorAdminLTE._boxRefreshButton = function ($) {
-	/*
-	 * BOX REFRESH BUTTON
-	 * ------------------
-	 * This is a custom plugin to use with the component BOX. It allows you to add
-	 * a refresh button to the box. It converts the box's state to a loading state.
-	 *
-	 * @type plugin
-	 * @usage $("#box-widget").boxRefresh( options );
-	 */
 
 	"use strict";
 
@@ -684,19 +677,18 @@ MeteorAdminLTE._boxRefreshButton = function ($) {
 
 };
 
+/*
+ * EXPLICIT BOX CONTROLS
+ * -----------------------
+ * This is a custom plugin to use with the component BOX. It allows you to activate
+ * a box inserted in the DOM after the app.js was loaded, toggle and remove box.
+ *
+ * @type plugin
+ * @usage $("#box-widget").activateBox();
+ * @usage $("#box-widget").toggleBox();
+ * @usage $("#box-widget").removeBox();
+ */
 MeteorAdminLTE._explicitBoxActivation = function ($) {
-	/*
-	 * EXPLICIT BOX ACTIVATION
-	 * -----------------------
-	 * This is a custom plugin to use with the component BOX. It allows you to activate
-	 * a box inserted in the DOM after the app.js was loaded, toggle and remove box..
-	 *
-	 * @type plugin
-	 * @usage $("#box-widget").activateBox();
-	 *  * @usage $("#box-widget").toggleBox();
-	 * @usage $("#box-widget").removeBox();
-	 */
-	var self = this;
 
 	'use strict';
 
@@ -705,26 +697,27 @@ MeteorAdminLTE._explicitBoxActivation = function ($) {
 	};
 
 	$.fn.toggleBox = function(){
-		var button = $($.AdminLTE.boxWidget.selectors.collapse, this);
+		var button = $(self.AdminLTE.boxWidget.selectors.collapse, this);
 		self.AdminLTE.boxWidget.collapse(button);
 	};
 
 	$.fn.removeBox = function(){
-		var button = $($.AdminLTE.boxWidget.selectors.remove, this);
+		var button = $(self.AdminLTE.boxWidget.selectors.remove, this);
 		self.AdminLTE.boxWidget.remove(button);
 	};
+
 };
 
+/*
+ * TODO LIST CUSTOM PLUGIN
+ * -----------------------
+ * This plugin depends on iCheck plugin for checkbox and radio inputs
+ *
+ * @type plugin
+ * @usage $("#todo-widget").todolist( options );
+ */
 MeteorAdminLTE._todoListCustomPlugin = function ($) {
 
-	/*
-	 * TODO LIST CUSTOM PLUGIN
-	 * -----------------------
-	 * This plugin depends on iCheck plugin for checkbox and radio inputs
-	 *
-	 * @type plugin
-	 * @usage $("#todo-widget").todolist( options );
-	 */
 	'use strict';
 
 	$.fn.todolist = function (options) {
@@ -775,4 +768,3 @@ MeteorAdminLTE.run = function () {
 	this._explicitBoxActivation(jQuery);
 	this._todoListCustomPlugin(jQuery);
 };
-

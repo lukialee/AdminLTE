@@ -15,7 +15,6 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.3.2.4');
   api.use('ecmascript');
-  api.mainModule('admin-lte.js');
 
   api.use('jquery', where); // Dependencies
   api.use('twbs:bootstrap@3.3.5', where); // Dependencies
@@ -45,11 +44,4 @@ Package.onUse(function(api) {
   //export
   api.export("MeteorAdminLTE", where);
 
-});
-
-Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('lukialee:admin-lte');
-  api.mainModule('admin-lte-tests.js');
 });
