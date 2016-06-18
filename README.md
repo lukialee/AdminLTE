@@ -3,6 +3,7 @@ Meteor usage
 我很喜欢用AdminLTE这个模板，为了在Meteor中更方便地使用，借鉴了YP2的做法。
 为了让package更小，删除了一些多余文件，为了让中国大陆的用户能正常使用（你懂得)，删除了google的css文件的引用。
 
+
 This package is inspired by: [yp2/AdminLTE](https://github.com/yp2/AdminLTE/)
 Many users in China couldn't access google's server. So I remove this line:
 ```css
@@ -17,23 +18,18 @@ meteor add lukialee:admin-lte
 You could use AdminLTE on any template or layout.
 ```js
 Template.myTemplate.onRendered(function () {
-
     var self = this;
     if (self.view.isRendered) {
     		//initSettings();//Optional. You could change default settings.
         var body = $('body');
-            body.removeClass();
-            body.addClass("skin-blue sidebar-mini");
-
-        $(function () {
-            MeteorAdminLTE.run()
-        });
+				body.removeClass();
+				body.addClass("skin-blue sidebar-mini");
+        MeteorAdminLTE.run();
     }
 
     function initSettings(){
     		MeteorAdminLTE.AdminLTE.options.animationSpeed = 200;
     }
-
 });
 ```
 
